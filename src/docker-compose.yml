@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  flask-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: afm_flask_app
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
+      DATABASE_URL: postgresql://afm_user:afm_password@db:5432/AFM
+    ports:
+      - "5001:5000" # TODO: Check this with with markus and the apple gang (mac)
+      - "5678:5678"
+    volumes:
+      - .:/app
+      - ./src:/AFM/src
+      - ./static:/AFM/src/static
+      - ./templates:/AFM/src/templates
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    container_name: afm_postgres
+    environment:
+      POSTGRES_USER: afm_user
+      POSTGRES_PASSWORD: afm_password
+      POSTGRES_DB: AFM
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  postgres_data:

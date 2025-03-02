@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Flood Reports</title>
+    <link rel="stylesheet" href="../static/manage_reports.css">
+</head>
+<body>
+    <a href="{{ url_for('app_home') }}" class="home-button">Home</a>
+    
+    <div class="container">
+        <div class="header">
+            <h1>All Flood Reports</h1>
+            <a class="toggle-btn-grey" href="/manage_reports">Show Unverified Reports</a>
+        </div>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Location</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Description</th>
+                        <th>Severity</th>
+                        <th>Picture</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="reports-table-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="..\static\scripts\all_reports.js"></script>
+</body>
+</html>
